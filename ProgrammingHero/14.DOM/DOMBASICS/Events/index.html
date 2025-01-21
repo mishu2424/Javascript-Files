@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event JS</title>
+  </head>
+  <body>
+    <!-- Different ways to set event -->
+    <!-- option 1 -->
+    <button onclick="document.body.style.backgroundColor='red'">
+      Make Red
+    </button>
+    <!-- option 2 -->
+    <button onclick="makeBlue()">Make Blue</button>
+    <!-- option 3 -->
+    <button id="makeYellow">Make Yellow</button>
+    <!-- option 4 -->
+    <button id="makePink">Make Pink</button>
+
+    <div style="padding: 2%;">
+      <button id="eventBtn">Events</button>
+      <input id="inputField" type="text" />
+    </div>
+    <script>
+      // option 2
+      const makeBlue = () => {
+        document.body.style.backgroundColor = "blue";
+      };
+      // option 3
+      const makeYellow = document.getElementById("makeYellow");
+      makeYellow.onclick = makeYellowBg;
+      function makeYellowBg() {
+        document.body.style.backgroundColor = "yellow";
+      }
+      // option 4
+      const makePinkBtn = document.getElementById("makePink");
+      makePinkBtn.addEventListener("click", () => {
+        document.body.style.backgroundColor = "pink";
+      });
+
+      document.getElementById('inputField').addEventListener("focus",(e)=>{
+        document.getElementById('inputField').style.outlineColor="blue";
+      })
+      document.getElementById('inputField').addEventListener("blur",(e)=>{
+        document.getElementById('inputField').style.borderColor="red";
+      })
+    //   document.getElementById('inputField').addEventListener("keydown",(e)=>{
+    //     console.log(e.target.value)
+    //   })
+    //   document.getElementById('inputField').addEventListener("keypress",(e)=>{
+    //     console.log(e.target.value)
+    //   })
+      document.getElementById('inputField').addEventListener("keyup",(e)=>{
+        console.log(e.target.value)
+      })
+    </script>
+  </body>
+</html>

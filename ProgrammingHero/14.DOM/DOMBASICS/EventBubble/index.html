@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubble</title>
+</head>
+<body>
+    <header>
+        <main>
+            <section id="ul-section">
+                <div id="container">
+                    <ul id="ul-container">
+                        <li id="item1">item 1</li>
+                        <li id="item2">item 2</li>
+                        <li id="item3">item 3</li>
+                        <li id="item4">item 4</li>
+                        <li id="item5">item 5</li>
+                        <li id="item6">item 6</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </header>
+    <script>
+        document.getElementById('item2').addEventListener("click",(e)=>{
+            console.log('item 2 has been clicked');
+            e.stopPropagation();
+        })
+        document.getElementById('ul-container').addEventListener("click",()=>{
+            console.log('ul has been clicked');
+        })
+        document.getElementById('container').addEventListener("click",()=>{
+            console.log('container has been clicked');
+        })
+        document.getElementById('ul-section').addEventListener("click",()=>{
+            console.log('section has been clicked');
+        })
+        document.body.addEventListener("click",()=>{
+            console.log('body has been clicked');
+            
+        })
+        // Notes->
+        // Now if we click on item-2 we will get the following in the console-
+        // item 2 has been clicked
+        // ul has been clicked
+        // container has been clicked
+        // section has been clicked
+        // body has been clicked
+        
+        // so what happened is that when we clicked on item 2, the browser starts its capturing phase meaning trying to get to the target
+        // where it was clicked. After the event of the clicked element is done, it goes to the parent element to see if there is any any event
+        // set for it. It goes to its ultimate parent checking the events. 
+
+        // This entire process is called Event Bubbling.
+
+        // Now if we want to stop this event bubbling from going to its parent meaning when we are clicking on item2 the only event of item2 should
+        // happen instead of other events of its parent we can use event.stopPropagation();
+
+        // if there are multiple events for item2 we can use event.stopImmediatePropagation();
+
+        //Event Capture(Using this process, the event bubble process gets reversed, it starts from parent, goes to the targeted element.)
+        // document.getElementById('item2').addEventListener("click",(e)=>{
+        //     console.log('item 2 has been clicked');
+        //     // e.stopPropagation();
+        // },{ capture: true })
+        // document.getElementById('ul-container').addEventListener("click",()=>{
+        //     console.log('ul has been clicked');
+        // },{ capture: true })
+        // document.getElementById('container').addEventListener("click",()=>{
+        //     console.log('container has been clicked');
+        // },{ capture: true })
+        // document.getElementById('ul-section').addEventListener("click",()=>{
+        //     console.log('section has been clicked');
+        // },{ capture: true })
+        // document.body.addEventListener("click",()=>{
+        //     console.log('body has been clicked');
+            
+        // },{ capture: true })
+    </script>
+</body>
+</html>

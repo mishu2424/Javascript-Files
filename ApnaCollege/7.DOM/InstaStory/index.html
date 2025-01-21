@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insta Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stories::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+</head>
+<body class="h-screen bg-sky-300">
+    <header></header>
+    <main class="w-full h-full">
+        <section class="flex items-center justify-center h-full w-full">
+            <div class="card w-72 h-[400px] bg-white relative rounded-lg">
+                <div class="story-img w-full h-full absolute hidden bg-center bg-cover duration-500 rounded-lg"></div>
+                <div class="stories w-full h-[120px] border-b border-gray-400 p-3 whitespace-nowrap overflow-hidden overflow-x-auto overflow-y-hidden space-x-3">
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+    <script src="./js/story.js"></script>
+</body>
+</html>

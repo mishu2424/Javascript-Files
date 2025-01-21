@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Delegation</title>
+</head>
+<body>
+    <div class="container">
+        <ul id="ul-container">
+            <li class="item">Lorem, ipsum.</li>
+            <li class="item">Ratione, fugit.</li>
+            <li class="item">Commodi, aliquam!</li>
+            <li class="item">Harum, facere.</li>
+            <li class="item">Quis, exercitationem.</li>
+        </ul>
+    </div>
+    <button id="addedBtn">Add item</button>
+    <script>
+        
+        const addedBtn=document.getElementById('addedBtn');
+        addedBtn.addEventListener("click",()=>{
+            const li=document.createElement("li");
+            li.innerText="Brand new item added";
+            li.classList.add('item');
+            document.getElementById('ul-container').appendChild(li);
+        })
+        const items=document.getElementsByClassName("item");
+        for(let item of items){
+            item.addEventListener("click",(e)=>{
+                // e.target.style.display="none";
+                e.target.parentNode.removeChild(item);
+            })
+        }
+
+        // Now, we can see that when we click on the already set item available in the html file is getting removed.
+        // But if we click on the new added list created in the js file, is not getting deleted.
+        // The issue you’re facing is because you're adding event listeners to the initial list items in the items collection 
+        // before the dynamically added items are appended to the DOM.
+        //Event listeners are added to the initial list items (li elements) when the page is loaded.
+        // Dynamically added list items (with the "item" class) are not present in the DOM at the time the page loads. 
+        // Hence, they are not bound to the event listener attached to the original list items.
+        // Event delegation is the key here. Since you are directly binding the event listener to each individual li (through for (let item of items)), 
+        // dynamically added items do not automatically get the event listener.
+
+        // So what we can do now is instead of selecting all the list item we can choose the parent element.
+        document.getElementById('ul-container').addEventListener("click",(e)=>{
+            // e.target.remove();
+            e.target.parentNode.removeChild(e.target);
+        })
+
+        // Now we can delete the new created list. This process is called Event Delegation.
+        //Event delegation is a technique that allows you to listen for events on a parent element (like the ul in your case) rather than
+        // attaching event listeners to each child element (like each li). 
+        // This works for both existing elements and newly added elements
+        // How It Works:
+        // The ul element is already in the DOM when the page loads, so you can attach an event listener to it.
+        // When you click on a li element inside the ul, the click event bubbles up from the li to the ul (this is called event bubbling).
+        // You can then check if the element that was clicked (e.target) is a li element and perform the desired action (like removing it).
+        // Key Concepts:
+        // Event Bubbling: When you click on a li, the event bubbles up to the parent ul. The ul listens for the event.
+        // Event Delegation: You bind the event listener to the parent (ul), not individual li elements.
+        // Dynamic Elements: The new li items get caught by the parent’s event listener because the event listener is attached 
+        // to the parent (ul), not individual li elements.
+
+        //Why Does Event Delegation Work?
+        // Event delegation works because the event is not directly bound to the individual li elements, but to their common parent (ul). 
+        // When you click on any of the items, the click bubbles up and is handled by the parent, 
+        // whether the item existed when the page loaded or was dynamically added.
+        // In Conclusion:
+        //When you use event delegation, you don't need to worry about which specific elements exist at the time the page loads or when they are dynamically created. The event listener on the parent (ul) 
+        // will catch the events for both the existing and newly added li elements!
+    </script>
+</body>
+</html>

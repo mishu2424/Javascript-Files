@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to DOM Handlers</h1>
+    </header>
+    <main>
+        <h1>Groceries</h1>
+        <ul>
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+            <li>item 4</li>
+        </ul>
+
+        <section>
+            <h1>Places to visit</h1>
+            <ul>
+                <li id="myPlace" class="important-places first-place fav-place">place 1</li>
+                <li class="important-places">place 2</li>
+                <li class="important-places">place 3</li>
+                <li id="other-place">place 4</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- adding the js file -->
+     <script src="./js/dom.js"></script>
+    <!-- we can also do the js code here in the html file -->
+     <script>
+        // js getElementsByTagName property
+        const liCollection=document.getElementsByTagName('li');
+        // one way-> converting array like liCollection to an array using array.from to use forEach loop
+        Array.from(liCollection).forEach(element => {
+            // console.log(element.innerText);
+        });
+        // another way->
+        for(const li of liCollection){
+            // console.log(li.innerText)
+        }
+        const headings=document.getElementsByTagName('h1');
+        for(const heading of headings){
+            // console.log(heading.innerText)
+        }
+
+        // js getElementsByClassName property
+        const places=document.getElementsByClassName('important-places')
+        for(const place of places){
+            // console.log(place.innerText)
+        }
+
+        //js getElementById
+        const otherPlace=document.getElementById('other-place')
+        // console.log(typeof otherPlace)
+        // console.log(otherPlace)
+        // console.dir(otherPlace)
+        // console.log(otherPlace.innerText)
+
+        // js querySelectorAll
+        const allList=document.querySelectorAll('.important-places')
+        console.log(allList)
+        console.log(typeof allList)
+        
+        //js querySelector
+        const firstList=document.querySelector('.important-places')
+        console.log(firstList)
+        console.log(typeof firstList)
+
+
+        //js classList property
+        const place=document.getElementById('myPlace');
+        const classList=place.classList //getting an array like object.
+        console.log(classList)
+        console.log(typeof classList)
+
+        //js getAttribute property
+        const classes=place.getAttribute('class') //returns a string
+        console.log(classes)
+        console.log(typeof classes)
+
+        //js setAttribute property
+        // place.setAttribute('class','favP'); // it removes other classes already present in the element.
+        console.log(place.classList)
+        
+        //using classList property
+        place.classList.add('favPlace'); //it doesn't remove but adds the new class with other classes.
+        console.log(place.classList)
+     </script>
+</body>
+</html>

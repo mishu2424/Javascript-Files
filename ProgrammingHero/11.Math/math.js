@@ -34,7 +34,7 @@ console.log(ceiled,ceiled2)
 
 //random number generator
 const rand=Math.random() //it returns a decimal number always 
-//if you want to to get a integer number, let's say you want to get any random number
+//if you want to to get an integer number, let's say you want to get any random number
 //until 20.
 const roundedRandom=Math.round(rand*20);
 console.log(roundedRandom)

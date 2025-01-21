@@ -9,3 +9,5 @@ for (let i = 0; i < marks.length; i++) {
 console.log(parseInt((sum/count).toFixed(2)));
 console.log(parseFloat((sum/count).toFixed(2)));
 console.log(Number((sum/count).toFixed(2)));
+
+
